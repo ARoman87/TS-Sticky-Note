@@ -10,15 +10,23 @@ import MongoStore from "connect-mongo";
 import { requiresAuth } from "./middleware/auth";
 import cors from "cors"
 
+const corsOptions = {
+    origin: "*",
+    credentials: true,
+    optionSuccessStatus: 200,
+}
+
 
 
 const app = express();
+
+app.use(cors(corsOptions))
 
 app.use(morgan("dev"));
 
 app.use(express.json());
 
-app.use(cors)
+
 
 app.use(session({
     secret: env.SESSION_SECRET,
